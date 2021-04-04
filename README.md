@@ -6,7 +6,11 @@ The project started while discovering PNG with FS2020. OSM provides only limited
 The contained files are used to create a Docker Image:  bm98ch/fsimpngtiles
 which provides a tile server and a mapping web app.  
 
+https://hub.docker.com/repository/docker/bm98ch/fsimpngtiles  
+
 Information about how and what are in the PDF (HowTo...) and should help to get started.  
+https://github.com/bm98/FSimPngTiles/blob/main/HowTo-V0.9.pdf  
+
 
 The services are composed from Node.js components and some tinkering with Javascript.  
 The tileserver is a tilelive/tessera Tile Server and is used to provide tiles for open layers web apps.  
@@ -20,6 +24,7 @@ A mapping app is included – to be found at port 8080. It also accepts tracking
 ### Quick Guide
 
 See HowTo PDF file.
+https://github.com/bm98/FSimPngTiles/blob/main/HowTo-V0.9.pdf  
 
 ---
 
