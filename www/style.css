@@ -1,0 +1,45 @@
+
+/* Standalone Map - full VP height and visible start*/
+ 
+ .row{
+  display: flex; 
+  /* make it a fixed area with top margin of the tabs based on viewport height */
+  max-height: 100vh;
+  min-height: 100vh;
+}
+
+/* Map Col*/
+.split_column_right {
+  float: left;
+  width: 100%;
+  border: 3px outset rgb(74, 60, 107);
+  background: black;
+}
+
+#map_container{
+  width: 100%;
+  height: calc(100vh - 25px);
+  max-height: inherit;
+}
+
+
+/* Button element*/
+#track_aircraft_button_on.track {
+  background-image: url("./images/track_on.png");
+  background-size: cover;
+}
+
+#track_aircraft_button_off.track {
+  background-image: url("./images/track_off.png");
+  background-size: cover;
+}
+
+
+/* High DPI tablet (iPad & co) - make it more readable */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+  #map_container{
+    width: 100%;
+    height: calc(100vh - 55px);
+    max-height: inherit;
+  }
+}

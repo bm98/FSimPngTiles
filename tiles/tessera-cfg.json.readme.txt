@@ -1,0 +1,60 @@
+README for the bm98ch/fsimtileserver configuration file
+fsimtileserver is implementing a tilelive/tessera tile server
+see: https://github.com/mapbox/tilelive
+
+Name: tessera-cfg.json
+Location: the ./tiles folder of the server path
+
+Place your tiles in a subfolder of this directory
+e.g. PNGmap rsp. OTHERmap  for this example
+PNGmap would contain the z/x/y.jpg   raster tiles
+OTHERmap would contain  z/x/y.png   raster tiles
+
+The configuration file must conform to JSON specs (snip below)
+see: https://github.com/mojodna/tessera
+
+You define server routes  /ROUTE  and the corresponding tilelive source.
+The route is the http path to get the tiles from
+Only the file system module is installed i.e. can only serve from the local disk
+see: https://github.com/mapbox/tilelive-file
+
+There can be multiple tile sets defined 
+
+Each one starts as:
+"/ROUTE" : { ... }
+"sources": "file://./tiles/MapFolder[/?filetype=jpg]"  
+   defines the source protocol (file://) and the path where the tiles will be found it is ./tiles/Tiledirectory
+Note: the optional query parameter ?/filetype=jpg  is required if tiles are NOT of .png type
+Nowhere documented but the tilelive-file module seems to be sensitive to this one... (visit the source code)
+
+The two config options tell tessera to not use cors and timing for that route
+
+For the example below one could access the PNG tiles with either 
+   http://Host:8081/{z}/{x}/{y.jpg}
+but also with 
+   http://Host:8081/PNG/{z}/{x}/{y.jpg}
+Using 
+   http://Host:8081/OTHER/{z}/{x}/{y.png}  would serve tiles from the folder OTHERmap as .png files
+
+Note: the folder where the tiles are located requires the presence of the metadata.json file 
+See also metadata.json.readme.txt about how and what 
+
+-----8<------------
+{
+  "/": {
+    "source": "file://./tiles/PNGmap/?filetype=jpg",
+    "cors": false,
+    "timing": false
+  },
+  "/PNG": {
+    "source": "file://./tiles/PNGmap/?filetype=jpg",
+    "cors": false,
+    "timing": false
+  },
+  "/OTHER": {
+    "source": "file://./tiles/OTHERmap",
+    "cors": false,
+    "timing": false
+  }
+}
+-----8<------------

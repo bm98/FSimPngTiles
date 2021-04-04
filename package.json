@@ -1,0 +1,19 @@
+{
+  "name": "fsimpngtiles",
+  "version": "1.1.0",
+  "description": "tilelive/tessera Tile Server for PNG from Tactical Pilotage Maps image tiles @ port 8081, Map site at port 8080",
+  "homepage": "https://github.com/bm98/FSimPngTiles",
+  "main": "./node_modules/tessera/bin/tessera.js",
+  "scripts": {
+    "start": "concurrently \"node ./node_modules/tessera/bin/tessera.js -p 8081 -c ./tiles/tessera-cfg.json -r tilelive-file\" \"node main.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Martin Burri",
+  "license": "MIT, PNG Maps: Courtesy of the University of Texas Libraries, The University of Texas at Austin.",
+  "dependencies": {
+    "concurrently": "^6.0.0",
+    "express": "^4.17.1",
+    "tessera": "^0.14.1",
+    "tilelive-file": "0.0.3"
+  }
+}

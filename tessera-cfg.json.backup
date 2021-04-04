@@ -1,0 +1,12 @@
+{
+  "/": {
+    "source": "file://./tiles/PNGmap/?filetype=jpg",
+    "cors": false,
+    "timing": false
+  },
+  "/PNG": {
+    "source": "file://./tiles/PNGmap/?filetype=jpg",
+    "cors": false,
+    "timing": false
+  }
+}

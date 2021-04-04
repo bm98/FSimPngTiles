@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: block;
+  margin: 0;
+  font-family: Arial;
+  background: black;
+}
+
+/* ** Main Area */
+
+/* The expanding image container */
+.container {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  clear: both;
+  content: "";
+}
+
+/* The grid: two columns that floats next to each other */
+ 
+.row{
+  display: none; /* hide on startup*/
+  width: 100vw;
+  /* make it a fixed area with top margin of the tabs based on viewport height */
+  max-height: calc(100vh - 110px);
+  min-height: calc(100vh - 110px);
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+#page_canvas {
+  overflow: clip;
+}
+
+
+/* the Map styles */
+#map_container{
+  height: 100%; 
+  max-height: inherit;
+}
+
+/* OpenLayer target */
+#map_canvas {
+  position: relative;
+  width: 100%;
+  max-height: inherit;
+  height: inherit;
+}
+
+/* The Acft Track Toggle button*/
+/* Container*/
+#track_aircraft_control {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 70%;
+}
+
+
+#track_aircraft_button_on {
+  display: none;
+  cursor: pointer;
+  float: right;
+  width: 48px;
+  height: 48px;
+  background-size: 52px 52px;
+  background-repeat: no-repeat;
+  background-position: 0px;
+  background-color: argb(128,103, 57, 150);
+  border: none;
+}
+#track_aircraft_button_off {
+  display: none;
+  cursor: pointer;
+  float: right;
+  width: 48px;
+  height: 48px;
+  background-size: 52px 52px;
+  background-repeat: no-repeat;
+  background-position: 0px;
+  background-color: argb(128,103, 57, 150);
+  border: none;
+}
+
+
+#trackPos{
+  width: 20%;
+}
+
+#debug {
+  display: none;
+}
+
+/* High DPI tablet (iPad & co) - make it more readable */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+  #aptSearch{
+    font-size:x-large;
+  }
+}
