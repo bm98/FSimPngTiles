@@ -1,0 +1,6 @@
+The PNGmap Tiles should be in a folder here
+PNGmap\ ..  (around 35k Tiles 250MB)
+
+But Github limits the size to 100 MB 
+Contact me by raising an Issue 
+
