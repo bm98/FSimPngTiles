@@ -6,8 +6,8 @@
 #
 # start docker desktop - create shell (Powershell in Win)
 # head to this folder
-# Build: docker build --tag bm98ch/fsimpngtiles:1.1 .
-# Export tar: docker save -o ./fsimpngtiles-1.1.tar bm98ch/fsimpngtiles:1.1
+# Build: docker build --tag bm98ch/fsimpngtiles:1.2 .
+# Export tar: docker save -o ./fsimpngtiles-1.2.tar bm98ch/fsimpngtiles:1.2
 # 
 # PortMap:  from  8080/tcp   Web Server
 # PortMap:  from  8081/tcp   Tile Server
@@ -15,7 +15,7 @@
 #
 FROM node:lts-alpine
 
-LABEL version="1.1"
+LABEL version="1.2"
 LABEL imagename="bm98ch/fsimpngtiles"
 LABEL description="Simple tilelive/tessera based tile webserver for the Flightsim serves PNG tiles"
 LABEL attribution="PNG original maps Courtesy of the University of Texas Libraries, The University of Texas at Austin."

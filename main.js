@@ -51,6 +51,9 @@ var lat = -6.0;
 var lon = 146.0;
 var alt = 8000.0;
 var hdg = 0.0;
+var gs = 120;
+var vs = 0;
+
 
 // Start the simple Webserver
 server.listen(port, function () {
@@ -70,18 +73,18 @@ Request URL: http://localhost:PORT/api/location
 */
 app.get('/api/location' , function (req, res) {    
     //console.log('DEB: location Called! '); // DEBUG
-    const retObj = '{"pos_lon":' + lon + ',"pos_lat":' + lat + ',"alt_msl_ft":' + alt  + ',"hdg_true_deg":' + hdg + '}';
+    const retObj = '{"pos_lon":' +lon+ ',"pos_lat":' +lat+ ',"alt_msl_ft":' +alt+ ',"hdg_true_deg":' +hdg+ ',"gs_kt":'+gs+ ',"vs_fpm":' +vs+ '}';
     res.send(retObj); // Reply with records
 });
 
-// Requre a location to track 
+// Require a location to track 
 /*
-Route path: /api/track/:LAT_LON_ALT_HDG
-Get URL: http://localhost:PORT/api/track/12.3,-12.5,2300,256
+Route path: /api/track/:ACFT_DATA  (lat, lon, alt_msl, true heading, groundspeed, vertical rate)
+Get URL: http://localhost:PORT/api/track/12.3,-12.5,2300,256,120,-200
 */
-app.get('/api/track/:LAT_LON_ALT_HDG', function (req, rep) {
-    //console.log('DEB: GET track/__ Called! ' + req.params.LAT_LON_ALT_HDG); // DEBUG
-    const para = req.params.LAT_LON_ALT_HDG.split(',');
+app.get('/api/track/:ACFT_DATA', function (req, rep) {
+    //console.log('DEB: GET track/__ Called! ' + req.params.ACFT_DATA); // DEBUG
+    const para = req.params.ACFT_DATA.split(',');
     if ( para.length<2) {
       console.log('ERR: track - parameter should be at least lat,lon ');
       rep.status(500).send('Error: Parameter error - try again');
@@ -95,9 +98,11 @@ app.get('/api/track/:LAT_LON_ALT_HDG', function (req, rep) {
     }
     lat = para[0];
     lon = para[1];
-    // sanity
+    // sanity for any optional data
     if ( para.length>2  && !isNaN(para[2])) alt= para[2];
     if ( para.length>3  && !isNaN(para[3])) hdg= para[3];
+    if ( para.length>4  && !isNaN(para[4])) gs= para[4];
+    if ( para.length>5  && !isNaN(para[5])) vs= para[5];
 
     //console.log('Center coords received'); // DEBUG
     rep.send('Center coords received'); // reply to sender

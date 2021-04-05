@@ -74,6 +74,8 @@ function Map_obj()
   this.lonLat = [0,0];
   this.thdg = 0.0;
   this.alt_msl_ft = 0.0;
+  this.gs_kt = 0.0;
+  this.vs_fpm = 0.0;
 }
 
 // INSTANCEs
@@ -199,11 +201,14 @@ Map_obj.prototype.UpdateMap = function ( simData, self )
   simData.alt_msl_ft = ( Math.abs(simData.alt_msl_ft)<=60000 ) ? simData.alt_msl_ft : 0;
   simData.hdg_true_deg = ( simData.hdg_true_deg>=0 ) ? simData.hdg_true_deg : 0;
   simData.hdg_true_deg = ( simData.hdg_true_deg<=360 ) ? simData.hdg_true_deg : 0;
+  simData.gs_kt =  ( simData.gs_kt>=0 ) ? simData.gs_kt : 0;
 
   // save for user interaction updates  
   self.lonLat =  [ simData.pos_lon, simData.pos_lat ];
   self.thdg = simData.hdg_true_deg; 
   self.alt_msl_ft = simData.alt_msl_ft;
+  self.gs_kt = simData.gs_kt;
+  self.vs_fpm = simData.vs_fpm;
 
   var moved  = true; // TODO determine movement to optimize drawing
 
@@ -354,6 +359,7 @@ Map_obj.prototype.createCircleFeatures = function ( lonLat ) {
 Map_obj.prototype.updateMarker = function(self, moved) 
 {
   this.markerLonLat = this.lonLat;  // new location
+  const vsString = ((this.vs_fpm>0)? "↑ " : (this.vs_fpm<0)? "↓ " : "→ ") + this.vs_fpm.toFixed(0) + " FPM";
 
   this.updateIcon(this.thdg); // get the proper icon with orientation
   if (this.marker) {
@@ -369,7 +375,7 @@ Map_obj.prototype.updateMarker = function(self, moved)
             placement: 'point', 
             padding: [1,3,0,3],
             textAlign: 'center',
-            text: this.alt_msl_ft.toFixed(0) + " FT"
+            text: this.alt_msl_ft.toFixed(0) + " FT\n" + this.gs_kt.toFixed(0) + " KT\n" + vsString
           })
         });
         this.markerStatic.setStyle( this.markerStaticStyle );
